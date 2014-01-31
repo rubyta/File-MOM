@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_momModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="DB_momModelStoreContainer">
+          <EntitySet Name="hadir" EntityType="DB_momModel.Store.hadir" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="non_pekerja" EntityType="DB_momModel.Store.non_pekerja" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="pekerja" EntityType="DB_momModel.Store.pekerja" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="rapat" EntityType="DB_momModel.Store.rapat" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ruangan" EntityType="DB_momModel.Store.ruangan" store:Type="Tables" store:Schema="dbo" store:Name="ruangan">
+            <DefiningQuery>SELECT 
+      [ruangan].[no_ruangan] AS [no_ruangan], 
+      [ruangan].[no_lantai] AS [no_lantai], 
+      [ruangan].[lokasi] AS [lokasi]
+      FROM [dbo].[ruangan] AS [ruangan]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sysdiagrams" EntityType="DB_momModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_hadir_non_pekerja" Association="DB_momModel.Store.FK_hadir_non_pekerja">
+            <End Role="non_pekerja" EntitySet="non_pekerja" />
+            <End Role="hadir" EntitySet="hadir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hadir_pekerja" Association="DB_momModel.Store.FK_hadir_pekerja">
+            <End Role="pekerja" EntitySet="pekerja" />
+            <End Role="hadir" EntitySet="hadir" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="hadir">
+          <Key>
+            <PropertyRef Name="id_hadir" />
+          </Key>
+          <Property Name="nopek" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="no_rapat" Type="int" Nullable="false" />
+          <Property Name="id_non_pekerja" Type="int" Nullable="false" />
+          <Property Name="id_hadir" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="hadir" Type="char" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="non_pekerja">
+          <Key>
+            <PropertyRef Name="id_non_pekerja" />
+          </Key>
+          <Property Name="id_non_pekerja" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nama" Type="varchar(max)" Nullable="false" />
+          <Property Name="instansi" Type="varchar(max)" Nullable="false" />
+          <Property Name="email_address" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pekerja">
+          <Key>
+            <PropertyRef Name="nopek" />
+          </Key>
+          <Property Name="nopek" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="nama_pekerja" Type="varchar(max)" Nullable="false" />
+          <Property Name="jabatan" Type="varchar(max)" Nullable="false" />
+          <Property Name="email_address" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rapat">
+          <Key>
+            <PropertyRef Name="no_rapat" />
+          </Key>
+          <Property Name="no_rapat" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tanggal_rapat" Type="varchar(max)" />
+          <Property Name="perihal" Type="varchar" MaxLength="50" />
+          <Property Name="tindak_lanjut" Type="char" MaxLength="10" />
+          <Property Name="PIC" Type="varchar(max)" />
+          <Property Name="pimpinan_rapat" Type="varchar(max)" />
+          <Property Name="notulis" Type="varchar(max)" />
+          <Property Name="no_ruangan" Type="varchar(max)" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="FileType" Type="varchar" MaxLength="50" />
+          <Property Name="FileData" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'DB_mom.dbo.ruangan' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="ruangan">
+          <Key>
+            <PropertyRef Name="no_ruangan" />
+          </Key>
+          <Property Name="no_ruangan" Type="varchar(max)" Nullable="false" />
+          <Property Name="no_lantai" Type="int" />
+          <Property Name="lokasi" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_hadir_non_pekerja">
+          <End Role="non_pekerja" Type="DB_momModel.Store.non_pekerja" Multiplicity="1" />
+          <End Role="hadir" Type="DB_momModel.Store.hadir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="non_pekerja">
+              <PropertyRef Name="id_non_pekerja" />
+            </Principal>
+            <Dependent Role="hadir">
+              <PropertyRef Name="id_non_pekerja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hadir_pekerja">
+          <End Role="pekerja" Type="DB_momModel.Store.pekerja" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hadir" Type="DB_momModel.Store.hadir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pekerja">
+              <PropertyRef Name="nopek" />
+            </Principal>
+            <Dependent Role="hadir">
+              <PropertyRef Name="nopek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+      warning 6013: The table/view 'DB_mom.dbo.user1' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity you will need to review your schema, add the correct keys and uncomment it.
+      
+      <EntityType Name="user1">
+        <Property Name="email_add" Type="varchar" MaxLength="50" />
+        <Property Name="password" Type="varchar" MaxLength="50" />
+      </EntityType>-->
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_momModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="DB_momEntities">
+          <EntitySet Name="hadir" EntityType="DB_momModel.hadir" />
+          <EntitySet Name="non_pekerja" EntityType="DB_momModel.non_pekerja" />
+          <EntitySet Name="pekerja" EntityType="DB_momModel.pekerja" />
+          <EntitySet Name="rapat" EntityType="DB_momModel.rapat" />
+          <EntitySet Name="ruangan" EntityType="DB_momModel.ruangan" />
+          <EntitySet Name="sysdiagrams" EntityType="DB_momModel.sysdiagrams" />
+          <AssociationSet Name="FK_hadir_non_pekerja" Association="DB_momModel.FK_hadir_non_pekerja">
+            <End Role="non_pekerja" EntitySet="non_pekerja" />
+            <End Role="hadir" EntitySet="hadir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hadir_pekerja" Association="DB_momModel.FK_hadir_pekerja">
+            <End Role="pekerja" EntitySet="pekerja" />
+            <End Role="hadir" EntitySet="hadir" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="hadir">
+          <Key>
+            <PropertyRef Name="id_hadir" />
+          </Key>
+          <Property Name="no_rapat" Type="Int32" Nullable="false" />
+          <Property Name="id_hadir" Type="Int32" Nullable="false" />
+          <Property Name="hadir1" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="non_pekerja" Relationship="DB_momModel.FK_hadir_non_pekerja" FromRole="hadir" ToRole="non_pekerja" />
+          <NavigationProperty Name="pekerja" Relationship="DB_momModel.FK_hadir_pekerja" FromRole="hadir" ToRole="pekerja" />
+        </EntityType>
+        <EntityType Name="non_pekerja">
+          <Key>
+            <PropertyRef Name="id_non_pekerja" />
+          </Key>
+          <Property Name="id_non_pekerja" Type="Int32" Nullable="false" />
+          <Property Name="nama" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="instansi" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="email_address" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="hadir" Relationship="DB_momModel.FK_hadir_non_pekerja" FromRole="non_pekerja" ToRole="hadir" />
+        </EntityType>
+        <EntityType Name="pekerja">
+          <Key>
+            <PropertyRef Name="nopek" />
+          </Key>
+          <Property Name="nopek" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="nama_pekerja" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="jabatan" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="email_address" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="hadir" Relationship="DB_momModel.FK_hadir_pekerja" FromRole="pekerja" ToRole="hadir" />
+        </EntityType>
+        <EntityType Name="rapat">
+          <Key>
+            <PropertyRef Name="no_rapat" />
+          </Key>
+          <Property Name="no_rapat" Type="Int32" Nullable="false" />
+          <Property Name="tanggal_rapat" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="perihal" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="tindak_lanjut" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="PIC" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="pimpinan_rapat" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="notulis" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="no_ruangan" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="FileType" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ruangan">
+          <Key>
+            <PropertyRef Name="no_ruangan" />
+          </Key>
+          <Property Name="no_ruangan" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="no_lantai" Type="Int32" />
+          <Property Name="lokasi" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_hadir_non_pekerja">
+          <End Role="non_pekerja" Type="DB_momModel.non_pekerja" Multiplicity="1" />
+          <End Role="hadir" Type="DB_momModel.hadir" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_hadir_pekerja">
+          <End Role="pekerja" Type="DB_momModel.pekerja" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hadir" Type="DB_momModel.hadir" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="DB_momModelStoreContainer" CdmEntityContainer="DB_momEntities">
+          <EntitySetMapping Name="hadir">
+            <EntityTypeMapping TypeName="IsTypeOf(DB_momModel.hadir)">
+              <MappingFragment StoreEntitySet="hadir">
+                <ScalarProperty Name="no_rapat" ColumnName="no_rapat" />
+                <ScalarProperty Name="id_hadir" ColumnName="id_hadir" />
+                <ScalarProperty Name="hadir1" ColumnName="hadir" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="non_pekerja">
+            <EntityTypeMapping TypeName="IsTypeOf(DB_momModel.non_pekerja)">
+              <MappingFragment StoreEntitySet="non_pekerja">
+                <ScalarProperty Name="id_non_pekerja" ColumnName="id_non_pekerja" />
+                <ScalarProperty Name="nama" ColumnName="nama" />
+                <ScalarProperty Name="instansi" ColumnName="instansi" />
+                <ScalarProperty Name="email_address" ColumnName="email_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pekerja">
+            <EntityTypeMapping TypeName="IsTypeOf(DB_momModel.pekerja)">
+              <MappingFragment StoreEntitySet="pekerja">
+                <ScalarProperty Name="nopek" ColumnName="nopek" />
+                <ScalarProperty Name="nama_pekerja" ColumnName="nama_pekerja" />
+                <ScalarProperty Name="jabatan" ColumnName="jabatan" />
+                <ScalarProperty Name="email_address" ColumnName="email_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rapat">
+            <EntityTypeMapping TypeName="IsTypeOf(DB_momModel.rapat)">
+              <MappingFragment StoreEntitySet="rapat">
+                <ScalarProperty Name="no_rapat" ColumnName="no_rapat" />
+                <ScalarProperty Name="tanggal_rapat" ColumnName="tanggal_rapat" />
+                <ScalarProperty Name="perihal" ColumnName="perihal" />
+                <ScalarProperty Name="tindak_lanjut" ColumnName="tindak_lanjut" />
+                <ScalarProperty Name="PIC" ColumnName="PIC" />
+                <ScalarProperty Name="pimpinan_rapat" ColumnName="pimpinan_rapat" />
+                <ScalarProperty Name="notulis" ColumnName="notulis" />
+                <ScalarProperty Name="no_ruangan" ColumnName="no_ruangan" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ruangan">
+            <EntityTypeMapping TypeName="IsTypeOf(DB_momModel.ruangan)">
+              <MappingFragment StoreEntitySet="ruangan">
+                <ScalarProperty Name="no_ruangan" ColumnName="no_ruangan" />
+                <ScalarProperty Name="no_lantai" ColumnName="no_lantai" />
+                <ScalarProperty Name="lokasi" ColumnName="lokasi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="IsTypeOf(DB_momModel.sysdiagrams)">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_hadir_non_pekerja" TypeName="DB_momModel.FK_hadir_non_pekerja" StoreEntitySet="hadir">
+            <EndProperty Name="non_pekerja">
+              <ScalarProperty Name="id_non_pekerja" ColumnName="id_non_pekerja" />
+            </EndProperty>
+            <EndProperty Name="hadir">
+              <ScalarProperty Name="id_hadir" ColumnName="id_hadir" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_hadir_pekerja" TypeName="DB_momModel.FK_hadir_pekerja" StoreEntitySet="hadir">
+            <EndProperty Name="pekerja">
+              <ScalarProperty Name="nopek" ColumnName="nopek" />
+            </EndProperty>
+            <EndProperty Name="hadir">
+              <ScalarProperty Name="id_hadir" ColumnName="id_hadir" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Model">
+        <EntityTypeShape EntityType="DB_momModel.hadir" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_momModel.non_pekerja" Width="1.5" PointX="0.75" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_momModel.pekerja" Width="1.5" PointX="0.75" PointY="3.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_momModel.rapat" Width="1.5" PointX="2.75" PointY="3.75" Height="3.1340950520833335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_momModel.ruangan" Width="1.5" PointX="4.75" PointY="3.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_momModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" Height="1.9802864583333333" IsExpanded="true" />
+        <AssociationConnector Association="DB_momModel.FK_hadir_non_pekerja" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.8651432291666668" />
+          <ConnectorPoint PointX="3" PointY="1.8651432291666668" /></AssociationConnector>
+        <AssociationConnector Association="DB_momModel.FK_hadir_pekerja" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.8651432291666667" />
+          <ConnectorPoint PointX="2.5" PointY="4.8651432291666667" />
+          <ConnectorPoint PointX="2.5" PointY="3.5" />
+          <ConnectorPoint PointX="3.75" PointY="3.5" />
+          <ConnectorPoint PointX="3.75" PointY="2.8552864583333335" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

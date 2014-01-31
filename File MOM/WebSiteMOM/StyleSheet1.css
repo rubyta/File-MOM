@@ -1,0 +1,126 @@
+﻿body 
+{
+}
+@media screen and (max width:700px)
+{
+	#default
+	{
+		float:none;
+		width:auto;
+		margin:0;
+	}
+	#hadir
+	{
+		float:none;
+		width:auto;
+		margin:0;
+	}
+	#notulis
+	{
+		float:none;
+		width:auto;
+		margin:0;
+	}
+	#pekerja
+	{
+		float:none;
+		width:auto;
+		margin:0;
+	}
+	#nonpekerja
+	{
+		float:none;
+		width:auto;
+		margin:0;
+	}
+	#rapat
+	{
+		float:none;
+		width:auto;
+		margin:0;
+	}
+	#tindaklanjut
+	{
+		float:none;
+		width:auto;
+		margin:0;
+	}
+}
+
+/* Navigation */
+
+#navigation {
+	width: 200px;
+	top: 10em;
+	left: 1em;
+	width: 13em;	
+	position:absolute;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:90%;
+}
+#navigation ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#navigation li {
+	border-bottom: 1px solid #10f902;
+}
+#navigation li a  {
+	display: block;
+	padding: 5px 5px 5px 0.5em;
+	border-left: 5px solid #001eff;
+	border-right: 1px solid #001eff;
+	background-color: #10b541;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+#navigation li a:hover {
+	background-color: #001eff;
+	color: #FFFFFF;
+}
+#navigation ul ul {
+	margin-left: 12px;
+}
+#navigation ul ul li {
+	border-bottom: 1px solid #001eff;
+	margin:0;
+	background-color: #10f902;
+	color: #711515;
+}
+#navigation ul ul a:link, #navigation ul ul a:visited {
+	background-color: #10f902;
+	color: #001eff;
+}
+#navigation ul ul a:hover {
+	background-color: #001eff;
+	color: #FFFFFF;
+}
+#isi 
+{
+	margin-top:1em;
+	margin-left: 15em;
+	/*margin-right: 1em;*/
+}
+
+/* login page */
+input[type="checkbox"], .checkbox{margin:0 .25em 0 0;}
+.textfield
+{
+border:1px solid #a6c25c;
+width:135px;
+}
+.button2
+{
+ background-color:#a6c25c;
+ color:White;
+ font-size:11px;
+ font-weight:bold;
+ border:1px solid #7f9db9;
+ width:68px;
+}
+.color
+{
+	color : Red;
+	background-color:Lime;
+}

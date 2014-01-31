@@ -1,0 +1,83 @@
+﻿<%@ Master Language="VB" CodeFile="Help.master.vb" Inherits="Master_Help" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head id="Head1" runat="server">
+    <title>PHE - Minutes of Meeting (MOM)</title>
+    <link href="../StyleSheet1.css" rel="stylesheet" type="text/css" /> 
+    <script language="javascript" type="text/javascript" >
+        history.forward();
+
+        
+        /*function validate() {
+            var summary = "";
+            summary += isvalidEmail();
+            if (summary != "") {
+                alert(summary);
+                return false;
+            }
+            else {
+                return true;
+            }
+            function isvalidEmail() {
+                var uid;
+                var temp = document.getElementById;
+                uid = temp.value;
+                /*var re= /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*//*;
+                if (uid == "") {
+                    return ("Please enter email" + "\n");
+                }
+                else if (re.test(uid)) {
+                    return "";
+                }
+                else {
+                    return ("Email should be ex:abc@acb.com" + "\n");
+                }
+            }
+        }
+        */
+    </script>
+    </head>
+    <body>
+        <form id="form1" runat="server">
+            <table border="0" cellpadding="0" cellspacing="0" style="vertical-align: middle;
+                width: 100%; border-top-style: none; border-right-style: none; border-left-style: none;
+                border-bottom-style: none">
+                <tr>
+                    <td valign="middle">
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/logo-phe.jpg" Height="98px" 
+                        Width="221px"/></td>
+                    <td valign="middle" align="right">
+                        &nbsp;</td>
+                </tr>
+            </table>
+     
+            <table border="0" cellpadding="0" cellspacing="0" style="vertical-align: middle;
+                width: 100%; border-top-style: none; border-right-style: none; border-left-style: none;
+                border-bottom-style: none">
+                <tr>
+                    <td style="height: 25px; background-color: #009900; text-align: center">
+                    </td>
+                </tr>
+            </table>
+            <br />
+        <div>
+            <asp:contentplaceholder id="Content0" runat="server">
+            
+            </asp:contentplaceholder>
+        </div>
+        <br />
+            <table border="0" cellpadding="0" cellspacing="0" style="vertical-align: middle;
+                width: 100%; border-top-style: none; border-right-style: none; border-left-style: none;
+                border-bottom-style: none">
+                <tr>
+                    <td style="height: 30px; background-color: #009900; text-align: center">
+                        <asp:Label ID="label3" runat="server">
+                        PT Pertamina Hulu Energi 2013</asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

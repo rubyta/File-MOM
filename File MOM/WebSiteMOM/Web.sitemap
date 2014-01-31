@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="~/Notulis/NForm1.aspx" title="Insert Form Rapat" description="Memasukkan data rapat">
+    <siteMapNode title="View Tabel Rapat"
+      url="~/Notulis/Rapat.aspx"
+      description="Lihat tabel rapat">
+    </siteMapNode>
+
+    <siteMapNode title="Insert Attendance List"
+     url="~/Notulis/Hadir.aspx"
+     description="Memasukkan daftar hadir">
+      <siteMapNode url="~/Notulis/GridViewPekerja.aspx"
+        title="Add daftar pekerja"
+        description="Memasukkan data pekerja yang hadir di suatu rapat" />
+      <siteMapNode url="~/Notulis/GridViewNonPekerja.aspx"
+       title="Add daftar bukan pekerja"
+       description="Memasukkan data bukan pekerja yang hadir di suatu rapat" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

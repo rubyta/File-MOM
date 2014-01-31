@@ -1,0 +1,65 @@
+﻿<%@ Master Language="VB" CodeFile="Template2.master.vb" Inherits="Master_Template2" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+        <title>PHE - Minutes of Meeting (MOM)</title>
+        <link href="../StyleSheet1.css"rel="stylesheet" type="text/css" />
+         <script type="text/javascript" language="javascript">
+             function DisableBackButton() {
+                 window.history.forward()
+             }
+             DisableBackButton();
+             window.onload = DisableBackButton;
+             window.onpageshow = function(evt) { if (evt.persisted) DisableBackButton() }
+             window.onunload = function() { void (0) }
+        </script>
+    </head>
+    <body>
+        <form id="notulis1" runat="server">
+            <table border="0" cellpadding="0" cellspacing="0" style="vertical-align: middle;
+                width: 100%; border-top-style: none; border-right-style: none; border-left-style: none;
+                border-bottom-style: none">
+                <tr>
+                    <td valign="middle">
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/logo-phe.jpg" Height="80px" 
+                            Width="189px"/></td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" style="vertical-align: middle;
+                width: 100%; border-top-style: none; border-right-style: none; border-left-style: none;
+                border-bottom-style: none">
+                <tr>
+                    <td style="height: 25px; background-color: #009900; text-align: center">
+                        <asp:Label ID="labeltitle" runat="server" ><b>Meeting of Minutes (MOM)</b></asp:Label>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <div id="navigation">
+        <ul>
+                    <li><asp:HyperLink runat="server" ID="lnkPimpinan" NavigateUrl="~/PimpinanRapat/PForm.aspx">View List Rapat</asp:HyperLink></li>
+                    <li>
+                    <asp:HyperLink runat="server" ID="HyperLink2" NavigateUrl="~/PimpinanRapat/ViewHadir.aspx">View List Hadir</asp:HyperLink></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLink3" NavigateUrl="~/Mail/Email.aspx">Email</asp:HyperLink></li>
+                </ul>
+    </div>
+            <div id="isi">
+                <asp:contentplaceholder id="content" runat="server"></asp:contentplaceholder>
+                <asp:Button ID="LogoutButton" runat="server" Text="Logout" />
+            </div>
+            <br />
+            <table border="0" cellpadding="0" cellspacing="0" style="vertical-align: middle;
+                width: 100%; border-top-style: none; border-right-style: none; border-left-style: none;
+                border-bottom-style: none">
+                <tr>
+                    <td style="height: 30px; background-color: #009900; text-align: center">
+                        <asp:Label ID="label3" runat="server">
+                        Copyright PT Pertamina Hulu Energi 2013</asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
